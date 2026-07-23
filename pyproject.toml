@@ -17,3 +17,7 @@ dependencies = { file = ["requirements.txt"] }
 
 [tool.setuptools.packages.find]
 include = ["rodtep_claim_management*"]
+
+[tool.bench.frappe-dependencies]
+frappe = ">=16.0.0,<17.0.0"
+erpnext = ">=16.0.0,<17.0.0"
