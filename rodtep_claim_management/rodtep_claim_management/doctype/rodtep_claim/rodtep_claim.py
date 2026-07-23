@@ -91,6 +91,7 @@ def create_jv_on_submit(self,method):
 			meis_jv.company = self.company
 			meis_jv.cheque_no = self.name
 			meis_jv.cheque_date = self.posting_date
+			meis_jv.custom_cost_center = meis_cost_center
 			meis_jv.user_remark = "RODTEP against " + self.name 
 			for row in self.rodtep_details:
 				meis_jv.append("accounts", {
@@ -98,10 +99,12 @@ def create_jv_on_submit(self,method):
 					"reference_type": "Journal Entry",
 					"reference_name": row.je_no,
 					"credit_in_account_currency":row.debit_amount,
+					"cost_center": meis_cost_center,
 				})
 			meis_jv.append("accounts", {
 				"account": self.credit_account,
 				"debit_in_account_currency":self.total_debit_amount,
+				"cost_center": meis_cost_center,
 			})
 			
 			try:

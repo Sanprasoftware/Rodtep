@@ -27,6 +27,7 @@ def create_jv(self):
 				jv.company = self.company
 				jv.cheque_no = self.name
 				jv.cheque_date = self.posting_date
+				jv.custom_cost_center = drawback_cost_center
 				jv.user_remark = "Duty draw back against " + self.name + " for " + self.customer
 				jv.append("accounts", {
 					"account": drawback_receivable_account,
@@ -50,6 +51,7 @@ def create_jv(self):
 			meis_receivable_account = frappe.db.get_value("Company", { "company_name": self.company}, "meis_receivable_account")
 			meis_income_account = frappe.db.get_value("Company", { "company_name": self.company}, "meis_income_account")
 			meis_cost_center = frappe.db.get_value("Company", { "company_name": self.company}, "meis_cost_center")
+			# frappe.throw(str(meis_cost_center))
 			if not meis_receivable_account:
 				frappe.throw(_("Set RODTEP Receivable Account in Company"))
 			elif not meis_income_account:
@@ -63,6 +65,7 @@ def create_jv(self):
 				meis_jv.company = self.company
 				meis_jv.cheque_no = self.name
 				meis_jv.cheque_date = self.posting_date
+				meis_jv.custom_cost_center = meis_cost_center
 				meis_jv.user_remark = "RODTEP against " + self.name + " for " + self.customer
 				meis_jv.append("accounts", {
 					"account": meis_receivable_account,
