@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rodtep_claim_management"
+description = "Rodtep Claim Management"
+authors = [
+    { name = "FinByz", email = "info@finbyz.com" },
+]
+license = { text = "MIT" }
+dynamic = ["version", "dependencies"]
+
+[tool.setuptools.dynamic]
+version = { attr = "rodtep_claim_management.__version__" }
+dependencies = { file = ["requirements.txt"] }
+
+[tool.setuptools.packages.find]
+include = ["rodtep_claim_management*"]

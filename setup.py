@@ -1,10 +1,17 @@
-from setuptools import setup, find_packages
+from pathlib import Path
+
+from setuptools import find_packages, setup
 
 with open("requirements.txt") as f:
 	install_requires = f.read().strip().split("\n")
 
-# get version from __version__ variable in rodtep_claim_management/__init__.py
-from rodtep_claim_management import __version__ as version
+# Read the version without importing the app during a PEP 517 build.
+about = {}
+exec(
+	(Path(__file__).parent / "rodtep_claim_management" / "__init__.py").read_text(),
+	about,
+)
+version = about["__version__"]
 
 setup(
 	name="rodtep_claim_management",
